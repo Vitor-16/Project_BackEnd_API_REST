@@ -1,6 +1,6 @@
 //IMPORTANDO PACOTE EXPRESS
 const express = require('express');
-const routes = require('./route/routes');
+const routesCliente = require('./route/routesCliente');
 
 //CRIANDO EXECUTÁVEL DO EXPRESS ATRAVÉS DE APP
 const app = express();
