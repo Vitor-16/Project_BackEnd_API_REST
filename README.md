@@ -1,2 +1,2 @@
-# ProjetoPW2
-Projeto para estudos e desenvolvimento na matéria de PW2
+# ProjetoAPI_REST
+Projeto usando JavaScript e NodeJS para estudos e desenvolvimento na matéria de Programação Web.
