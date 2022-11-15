@@ -1,12 +1,12 @@
 //IMPORTANDO PACOTE SEQUELIZE
 const Sequelize = require('sequelize');
 
-//FAZENDO CONEXÃO COM BD ATRAVÉS DE SEU ARQUIVO
+//FAZENDO CONEXÃO COM ARQUIVO DO BANCO
 const connection = require('../database/database');
 
-//CRIAÇÃO DOS ATRIBUTOS E VALORES DE MODELCLIENTE
+//CRIANDO OS ATRIBUTOS E VALORES DA MODEL
 const modelCliente = connection.define(
-    'Cliente',
+    'tbl_Cliente',
     {
         IdCliente:{
             type: Sequelize.INTEGER,
@@ -41,5 +41,5 @@ const modelCliente = connection.define(
     }
 );
 
-model.sync({force:true});
+//model.sync({force:true});
 module.exports = model;
