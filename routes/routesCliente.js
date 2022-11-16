@@ -1,5 +1,7 @@
 //IMPORTANDO PACOTE EXPRESS PARA INDEXJS
+const { response } = require('express');
 const express = require('express');
+const { model } = require('../database/database');
 
 //UTILIZANDO MODEL CLIENTE CRIADA
 const modelCliente = require('../model/modelCliente');
@@ -9,11 +11,12 @@ const router = express.Router();
 
 /* ROTAS DE CRUD */
 
-//ROTA DE CADASTRO(CREATE)
+//ROTA DE CREATE
 router.post("/CadastrarCliente", (req, res)=>{
     console.log(req.body);
     //let{cpf_Cliente} = req.body;
-    let{nome_Cliente, cpf_Cliente, email_Cliente, senha_Cliente, dataNasc_Cliente, telefone_Cliente} = req.body;
+    let{nome_Cliente, cpf_Cliente, email_Cliente,
+        senha_Cliente, dataNasc_Cliente, telefone_Cliente} = req.body;
     modelCliente.create(
         {nome_Cliente},
         {cpf_Cliente},
@@ -24,7 +27,7 @@ router.post("/CadastrarCliente", (req, res)=>{
         )
     .then(
         ()=>{
-                return res.status(201).json({
+                return res.status(200).json({
                     erroStatus:false,
                     mensagemStatus:"CLIENTE CADASTRADO."
                 });
@@ -38,16 +41,133 @@ router.post("/CadastrarCliente", (req, res)=>{
                     errorObject:error
                 });
         }
-    );
+    )
 });
 
-//ROTA DE LEITURA(READ)
+//ROTA DE READ
+router.get("/ListarCliente", (req, res)=>{
+    modelCliente.findAll()
+    .then(
+        (response)=>{
+            return res.status(200).json({
+                erroStatus:false,
+                mensagemStatus:"CLIENTES LISTADOS COM SUCESSO.",
+                data:response
+            });
+        }
+    )
+    .catch(
+        (error)=>{
+            return res.status(400).json({
+                erroStatus:true,
+                mensagemStatus:"ERRO AO LISTAR OS CLIENTES.",
+                errorObject:error
+            });
+        }
+    )
+});
+//ROTA DE READ POR PK
+router.get("/ListaClientePK/:id_Cliente", (req, res)=>{
+    let {id_Cliente} = req.params;
+    modelCliente.findByPk({id_Cliente})
+    .then(
+        (response)=>{
+            return res.status(200).json({
+                erroStatus:false,
+                mensagemStatus:"CLIENTES POR PK LISTADO COM SUCESSO.",
+                data:response
+            });
+        }
+    )
+    .catch(
+        (error)=>{
+            return res.status(400).json({
+                erroStatus:true,
+                mensagemStatus:"ERRO AO LISTAR CLIENTES POR PK.",
+                errorObject:error
+            });
+        }
+    )
+});
+//ROTA DE READ POR NOME
+router.get("/ListaClienteNOME/:nome_Cliente", (req, res)=>{
+    let {nome_Cliente} = req.params;
+    modelCliente.findOne({attributes:['id_ Cliente','nome_Cliente'], where:{nome_Cliente}})
+    .then(
+        (response)=>{
+            return res.status(200).json({
+                erroStatus:false,
+                mensagemStatus:"CLIENTES POR NOME LISTADOS COM SUCESSO.",
+                data:response
+            });
+        }
+    )
+    .catch(
+        (error)=>{
+            return res.status(400).json({
+                erroStatus:true,
+                mensagemStatus:"ERRO AO LISTAR CLIENTES POR NOME",
+                errorObject:error
+            });
+        }
+    )
+});
+//ROTA DE UPDATE
+router.put('/AlterarCliente', (req, res)=>{
+    const{nome_Cliente, cpf_Cliente, email_Cliente,
+        senha_Cliente, dataNasc_Cliente, telefone_Cliente} = req.body;
+    modelCliente.update(
+        {nome_Cliente},
+        {cpf_Cliente},
+        {email_Cliente},
+        {senha_Cliente},
+        {dataNasc_Cliente},
+        {telefone_Cliente},
+        {where:{id_Cliente}}
+    )
+    .then(
+        ()=>{
+            return res.status(200).json({
+                erroStatus:false,
+                mensagemStatus:"DADOS DE CLIENTE ALTERADO COM SUCESSO."
+            });
+        }
+    )
+    .catch(
+        (error)=>{
+            return res.status(400).json({
+                erroStatus:true,
+                mensagemStatus:"ERRO AO ALTERAR DADOS DE CLIENTE.",
+                errorObject:error
+            });
+        }
+    )
+});
 
-
-//ROTA DE ALTERAÇÃO(UPDATE)
-
-
-//ROTA DE EXCLUSÃO(DELETE) 
-
+//ROTA DE DELETE
+router.delete('/DeletarCliente/:id_Cliente', (req, res)=>{
+    console.log(req.params);
+    let {id_Cliente} = req.params;
+    modelCliente.destroy(
+        {where:{id_Cliente}}
+    )
+    .then(
+        ()=>{
+            return res.status(200).json({
+                erroStatus:false,
+                mensagemStatus:"CLIENTE EXCLUIDO COM SUCESSO",
+            });
+        }
+    )
+    .catch(
+        (error)=>{
+            return res.status(200).json({
+                erroStatus:true,
+                mensagemStatus:"ERRO AO EXCLUIR O CLIENTE.",
+                errorObject:error
+            });
+        }
+    )
+});
 
 module.exports = router;

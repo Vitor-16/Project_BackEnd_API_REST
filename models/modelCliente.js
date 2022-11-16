@@ -8,7 +8,7 @@ const connection = require('../database/database');
 const modelCliente = connection.define(
     'tbl_Cliente',
     {
-        IdCliente:{
+        id_Cliente:{
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
@@ -42,4 +42,4 @@ const modelCliente = connection.define(
 );
 
 //model.sync({force:true});
-module.exports = model;
+module.exports = modelCliente;
