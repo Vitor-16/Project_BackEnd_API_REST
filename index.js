@@ -2,7 +2,7 @@
 const express = require('express');
 
 //IMPORTANDO ARQUIVO DE ROTAS CLIENTE
-const routesCliente = require('./route/routesCliente');
+const routesCliente = require('./routes/routesCliente');
 
 //CRIANDO EXECUTÁVEL DO EXPRESS ATRAVÉS DE APP
 const app = express();
@@ -14,7 +14,7 @@ app.use('/', routesCliente);
 
 /*TESTE DE ROTA RAIZ 
 app.get('/', function (req, res) {
-     res.send('RESPOSTA DA ROTA RAIZ DA APLICAÇÃO');
+    res.send('RESPOSTA DA ROTA RAIZ DA APLICAÇÃO');
 });*/
 
 //CRIANDO WEB SERVER E DEFINIDO PORTA LÓGICA(OBRIGATÓRIA) E CALLBACK(OPCIONAL)

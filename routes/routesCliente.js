@@ -4,12 +4,12 @@ const express = require('express');
 const { model } = require('../database/database');
 
 //UTILIZANDO MODEL CLIENTE CRIADA
-const modelCliente = require('../model/modelCliente');
+const modelCliente = require('../models/modelCliente');
 
 //USANDO GERENCIADOR DE ROTAS DO PACOTE EXPRESS
 const router = express.Router();
 
-/* ROTAS DE CRUD */
+/* ROTAS DE CRUD CLIENTE*/
 
 //ROTA DE CREATE
 router.post("/CadastrarCliente", (req, res)=>{
@@ -66,6 +66,7 @@ router.get("/ListarCliente", (req, res)=>{
         }
     )
 });
+
 //ROTA DE READ POR PK
 router.get("/ListaClientePK/:id_Cliente", (req, res)=>{
     let {id_Cliente} = req.params;
@@ -89,6 +90,7 @@ router.get("/ListaClientePK/:id_Cliente", (req, res)=>{
         }
     )
 });
+
 //ROTA DE READ POR NOME
 router.get("/ListaClienteNOME/:nome_Cliente", (req, res)=>{
     let {nome_Cliente} = req.params;
@@ -106,12 +108,13 @@ router.get("/ListaClienteNOME/:nome_Cliente", (req, res)=>{
         (error)=>{
             return res.status(400).json({
                 erroStatus:true,
-                mensagemStatus:"ERRO AO LISTAR CLIENTES POR NOME",
+                mensagemStatus:"ERRO AO LISTAR CLIENTES POR NOME.",
                 errorObject:error
             });
         }
     )
 });
+
 //ROTA DE UPDATE
 router.put('/AlterarCliente', (req, res)=>{
     const{nome_Cliente, cpf_Cliente, email_Cliente,
@@ -155,7 +158,7 @@ router.delete('/DeletarCliente/:id_Cliente', (req, res)=>{
         ()=>{
             return res.status(200).json({
                 erroStatus:false,
-                mensagemStatus:"CLIENTE EXCLUIDO COM SUCESSO",
+                mensagemStatus:"CLIENTE EXCLUIDO COM SUCESSO.",
             });
         }
     )
