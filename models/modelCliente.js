@@ -17,10 +17,6 @@ const modelCliente = connection.define(
             type: Sequelize.STRING(100),
             allowNull: false
         },
-        cpf_Cliente:{
-            type: Sequelize.STRING(45),
-            allowNull: false
-        },
         email_Cliente:{
             type: Sequelize.STRING(90),
             allowNull: false
