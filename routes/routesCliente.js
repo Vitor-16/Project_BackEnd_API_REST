@@ -14,12 +14,11 @@ const router = express.Router();
 //ROTA DE CREATE
 router.post("/CadastrarCliente", (req, res)=>{
     console.log(req.body);
-    //let{cpf_Cliente} = req.body;
-    let{nome_Cliente, cpf_Cliente, email_Cliente,
-        senha_Cliente, dataNasc_Cliente, telefone_Cliente} = req.body;
+
+    let{nome_Cliente, email_Cliente, senha_Cliente,
+        dataNasc_Cliente, telefone_Cliente} = req.body;
     modelCliente.create(
         {nome_Cliente},
-        {cpf_Cliente},
         {email_Cliente},
         {senha_Cliente},
         {dataNasc_Cliente},
@@ -117,11 +116,10 @@ router.get("/ListaClienteNOME/:nome_Cliente", (req, res)=>{
 
 //ROTA DE UPDATE
 router.put('/AlterarCliente', (req, res)=>{
-    const{nome_Cliente, cpf_Cliente, email_Cliente,
-        senha_Cliente, dataNasc_Cliente, telefone_Cliente} = req.body;
+    const{nome_Cliente, email_Cliente,senha_Cliente,
+        dataNasc_Cliente, telefone_Cliente} = req.body;
     modelCliente.update(
         {nome_Cliente},
-        {cpf_Cliente},
         {email_Cliente},
         {senha_Cliente},
         {dataNasc_Cliente},

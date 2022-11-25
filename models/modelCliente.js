@@ -18,24 +18,25 @@ const modelCliente = connection.define(
             allowNull: false
         },
         email_Cliente:{
-            type: Sequelize.STRING(90),
-            allowNull: false
+            type: Sequelize.STRING(100),
+            allowNull: true
         },
         senha_Cliente:{
-            type: Sequelize.STRING(45),
-            allowNull: false
+            type: Sequelize.CHAR(255),
+            allowNull: true
         },
         dataNasc_Cliente:{
-            type: Sequelize.STRING(45),
-            allowNull: false,
+            type: Sequelize.DATE(100),
+            allowNull: true,
             timestamp: true
         },
         telefone_Cliente:{
             type: Sequelize.STRING(15),
-            allowNull: false
+            allowNull: true
         },
     }
 );
 
-//model.sync({force:true});
+// modelCliente.sync({force:true}); 
+
 module.exports = modelCliente;
