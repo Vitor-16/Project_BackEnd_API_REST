@@ -6,7 +6,7 @@ const connection = require('../database/database');
 
 //CRIANDO OS ATRIBUTOS E VALORES DA MODEL
 const modelCliente = connection.define(
-    'tbl_Cliente',
+    'tbl_Clientes',
     {
         id_Cliente:{
             type: Sequelize.INTEGER,
@@ -14,29 +14,20 @@ const modelCliente = connection.define(
             autoIncrement: true
         },
         nome_Cliente:{
-            type: Sequelize.STRING(100),
+            type: Sequelize.STRING(255),
             allowNull: false
         },
         email_Cliente:{
-            type: Sequelize.STRING(100),
+            type: Sequelize.STRING(255),
             allowNull: true
         },
         senha_Cliente:{
-            type: Sequelize.CHAR(255),
-            allowNull: true
-        },
-        dataNasc_Cliente:{
-            type: Sequelize.DATE(100),
-            allowNull: true,
-            timestamp: true
-        },
-        telefone_Cliente:{
-            type: Sequelize.STRING(15),
+            type: Sequelize.STRING(255),
             allowNull: true
         },
     }
 );
 
-// modelCliente.sync({force:true}); 
+//modelCliente.sync({force:true}); 
 
 module.exports = modelCliente;

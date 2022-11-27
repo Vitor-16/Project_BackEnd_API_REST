@@ -15,14 +15,11 @@ const router = express.Router();
 router.post("/CadastrarCliente", (req, res)=>{
     console.log(req.body);
 
-    let{nome_Cliente, email_Cliente, senha_Cliente,
-        dataNasc_Cliente, telefone_Cliente} = req.body;
+    let{nome_Cliente, email_Cliente, senha_Cliente} = req.body;
     modelCliente.create(
         {nome_Cliente},
         {email_Cliente},
-        {senha_Cliente},
-        {dataNasc_Cliente},
-        {telefone_Cliente}
+        {senha_Cliente}
         )
     .then(
         ()=>{
@@ -43,7 +40,7 @@ router.post("/CadastrarCliente", (req, res)=>{
     )
 });
 
-//ROTA DE READ
+//ROTA DE READ SEM CRITÉRIO
 router.get("/ListarCliente", (req, res)=>{
     modelCliente.findAll()
     .then(
@@ -116,14 +113,11 @@ router.get("/ListaClienteNOME/:nome_Cliente", (req, res)=>{
 
 //ROTA DE UPDATE
 router.put('/AlterarCliente', (req, res)=>{
-    const{nome_Cliente, email_Cliente,senha_Cliente,
-        dataNasc_Cliente, telefone_Cliente} = req.body;
+    const{nome_Cliente, email_Cliente, senha_Cliente} = req.body;
     modelCliente.update(
         {nome_Cliente},
         {email_Cliente},
         {senha_Cliente},
-        {dataNasc_Cliente},
-        {telefone_Cliente},
         {where:{id_Cliente}}
     )
     .then(
@@ -162,7 +156,7 @@ router.delete('/DeletarCliente/:id_Cliente', (req, res)=>{
     )
     .catch(
         (error)=>{
-            return res.status(200).json({
+            return res.status(400).json({
                 erroStatus:true,
                 mensagemStatus:"ERRO AO EXCLUIR O CLIENTE.",
                 errorObject:error
