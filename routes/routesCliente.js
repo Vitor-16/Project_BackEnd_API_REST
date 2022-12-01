@@ -17,9 +17,7 @@ router.post("/CadastrarCliente", (req, res)=>{
 
     let{nome_Cliente, email_Cliente, senha_Cliente} = req.body;
     modelCliente.create(
-        {nome_Cliente},
-        {email_Cliente},
-        {senha_Cliente}
+        {nome_Cliente, email_Cliente, senha_Cliente},
         )
     .then(
         ()=>{
@@ -64,9 +62,9 @@ router.get("/ListarCliente", (req, res)=>{
 });
 
 //ROTA DE READ POR PK
-router.get("/ListaClientePK/:id_Cliente", (req, res)=>{
+router.get("/ListarClientePK/:id_Cliente", (req, res)=>{
     let {id_Cliente} = req.params;
-    modelCliente.findByPk({id_Cliente})
+    modelCliente.findByPk(id_Cliente)
     .then(
         (response)=>{
             return res.status(200).json({
@@ -88,9 +86,9 @@ router.get("/ListaClientePK/:id_Cliente", (req, res)=>{
 });
 
 //ROTA DE READ POR NOME
-router.get("/ListaClienteNOME/:nome_Cliente", (req, res)=>{
+router.get("/ListarClienteNOME/:nome_Cliente", (req, res)=>{
     let {nome_Cliente} = req.params;
-    modelCliente.findOne({attributes:['id_ Cliente','nome_Cliente'], where:{nome_Cliente}})
+    modelCliente.findOne({attributes:['id_Cliente','nome_Cliente'], where:{nome_Cliente}})
     .then(
         (response)=>{
             return res.status(200).json({
@@ -113,11 +111,9 @@ router.get("/ListaClienteNOME/:nome_Cliente", (req, res)=>{
 
 //ROTA DE UPDATE
 router.put('/AlterarCliente', (req, res)=>{
-    const{nome_Cliente, email_Cliente, senha_Cliente} = req.body;
+    const{id_Cliente, nome_Cliente, email_Cliente, senha_Cliente} = req.body;
     modelCliente.update(
-        {nome_Cliente},
-        {email_Cliente},
-        {senha_Cliente},
+        {nome_Cliente, email_Cliente, senha_Cliente},
         {where:{id_Cliente}}
     )
     .then(

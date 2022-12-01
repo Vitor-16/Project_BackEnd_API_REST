@@ -19,11 +19,11 @@ const modelCliente = connection.define(
         },
         email_Cliente:{
             type: Sequelize.STRING(255),
-            allowNull: true
+            allowNull: false
         },
         senha_Cliente:{
             type: Sequelize.STRING(255),
-            allowNull: true
+            allowNull: false
         },
     }
 );
