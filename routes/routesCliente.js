@@ -110,7 +110,7 @@ router.get("/ListarClienteNOME/:nome_Cliente", (req, res)=>{
 });
 
 //ROTA DE UPDATE
-router.put('/AlterarCliente', (req, res)=>{
+router.put('/AlterarCliente/:id_Cliente', (req, res)=>{
     const{id_Cliente, nome_Cliente, email_Cliente, senha_Cliente} = req.body;
     modelCliente.update(
         {nome_Cliente, email_Cliente, senha_Cliente},
