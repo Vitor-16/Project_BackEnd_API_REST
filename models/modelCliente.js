@@ -16,15 +16,7 @@ const modelCliente = connection.define(
         nome_Cliente:{
             type: Sequelize.STRING(255),
             allowNull: false
-        },
-        email_Cliente:{
-            type: Sequelize.STRING(255),
-            allowNull: false
-        },
-        senha_Cliente:{
-            type: Sequelize.STRING(255),
-            allowNull: false
-        },
+        }
     }
 );
 

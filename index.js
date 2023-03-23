@@ -8,6 +8,7 @@ const routesCliente = require('./routes/routesCliente');
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 
 //UTILIZANDO ROUTES.JS CRIADO
 app.use('/', routesCliente);
