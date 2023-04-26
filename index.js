@@ -3,6 +3,7 @@ const express = require('express');
 
 //IMPORTANDO ARQUIVO DE ROTAS CLIENTE
 const routesCliente = require('./routes/routesCliente');
+const routesLivro = require('./routes/routesLivro');
 
 //CRIANDO EXECUTÁVEL DO EXPRESS ATRAVÉS DE APP
 const app = express();
@@ -12,6 +13,7 @@ app.use(express.urlencoded({extended:true}));
 
 //UTILIZANDO ROUTES.JS CRIADO
 app.use('/', routesCliente);
+app.use('/', routesLivro);
 
 /*TESTE DE ROTA RAIZ 
 app.get('/', function (req, res) {
@@ -19,6 +21,6 @@ app.get('/', function (req, res) {
 });*/
 
 //CRIANDO WEB SERVER E DEFINIDO PORTA LÓGICA(OBRIGATÓRIA) E CALLBACK(OPCIONAL)
-app.listen(3000, () => {
-    console.log('RODANDO O SERVIDOR VIA - http://localhost:3000');
+app.listen(7777, () => {
+    console.log('RODANDO O SERVIDOR VIA - http://localhost:7777');
 });
