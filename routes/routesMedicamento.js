@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post('/cadastrarMedicamento', (req, res)=>{
 
-    const { titulo, preco, detalhes, imagen_peq, imagen_grd, tblCategoriaumId } = req.body;
+    const { titulo, preco, detalhes, imagen_peq, imagen_grd, tblClienteIdCliente } = req.body;
 
     modelMedicamento.create(
         {
@@ -16,7 +16,7 @@ router.post('/cadastrarMedicamento', (req, res)=>{
             detalhes,
             imagen_peq,
             imagen_grd,
-            tblCategoriaumId
+            tblClienteIdCliente
 
         }
     ).then(
@@ -78,7 +78,7 @@ router.delete('/excluirMedicamento/:id_medicamento', (req, res)=>{
 
                     return res.status(200).json({
                         erroStatus:false,
-                        mensagemStatus:'Livro excluído com sucesso.'
+                        mensagemStatus:'Medicamento excluído com sucesso.'
                     });
 
                 }).catch((erro)=>{
@@ -92,9 +92,10 @@ router.delete('/excluirMedicamento/:id_medicamento', (req, res)=>{
 
 });
 
-router.put('/editarMedicamento', (req, res)=>{
+router.put('/editarMedicamento/:id_medicamento', (req, res)=>{
+    const { id_medicamento } = req.params;
 
-    const { titulo, preco, detalhes, imagen_peq, imagen_grd, tblCategoriaumId, id_medicamento } = req.body;
+    const { titulo, preco, detalhes, imagen_peq, imagen_grd, tblClienteIdCliente  } = req.body;
 
     /** UPDATE SEM IMAGEM **/
     modelMedicamento.update(
@@ -103,7 +104,7 @@ router.put('/editarMedicamento', (req, res)=>{
         detalhes,
         imagen_peq, 
         imagen_grd,
-        tblCategoriaumId},
+        tblClienteIdCliente},
         {where: {id_medicamento}}
     ).then(
         ()=>{
