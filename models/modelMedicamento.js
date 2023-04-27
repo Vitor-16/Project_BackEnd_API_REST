@@ -45,6 +45,6 @@ modelCliente.hasMany(modelMedicamento);
 /*Implementação da  CHAVE PRIMÁRIA - LADO 1*/
 modelMedicamento.belongsTo(modelCliente);
 
-//modelLivro.sync({force:true});
+//modelMedicamento.sync({force:true});
 
 module.exports = modelMedicamento;
