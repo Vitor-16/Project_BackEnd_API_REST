@@ -1,14 +1,13 @@
 const express = require('express');
+const modelMedicamento = require('../models/modelMedicamento');
 
 const router = express.Router();
 
-const modelLivro = require('../models/modelLivro');
-
-router.post('/livro/cadastrarLivro', (req, res)=>{
+router.post('/cadastrarMedicamento', (req, res)=>{
 
     const { titulo, preco, detalhes, imagen_peq, imagen_grd, tblCategoriaumId } = req.body;
 
-    modelLivro.create(
+    modelMedicamento.create(
         {
             titulo,
             preco,
@@ -24,7 +23,7 @@ router.post('/livro/cadastrarLivro', (req, res)=>{
         ()=>{
             return res.status(201).json({
                 erroStatus:false,
-                mensagemStatus:'Livro inserido com sucesso.'
+                mensagemStatus:'Medicamento inserido com sucesso.'
             });      
         }
     ).catch((erro)=>{
@@ -36,11 +35,11 @@ router.post('/livro/cadastrarLivro', (req, res)=>{
 
 });
 
-router.get('/livro/listarLivro', (req, res)=>{
+router.get('/listarMedicamento', (req, res)=>{
 
-    modelLivro.findAll()
-        .then((livros)=>{
-            return res.status(200).json(livros)
+    modelMedicamento.findAll()
+        .then((medicamentos)=>{
+            return res.status(200).json(medicamentos)
         }).catch((erro)=>{
             return res.status(400).json({
                 erroStatus: true,
@@ -49,13 +48,13 @@ router.get('/livro/listarLivro', (req, res)=>{
         });
 });
 
-router.get('/livro/listarLivroCodigo/:id', (req, res)=>{
+router.get('/listarMedicamentoID/:id_medicamento', (req, res)=>{
 
-    const { id } = req.params
+    const {id_medicamento} = req.params
 
-    modelLivro.findByPk(id)
-        .then((livro)=>{
-            return res.status(200).json(livro)
+    modelMedicamento.findByPk(id_medicamento)
+        .then((medicamento)=>{
+            return res.status(200).json(medicamento)
         }).catch((erro)=>{
             return res.status(400).json({
                 erroStatus: true,
@@ -64,16 +63,16 @@ router.get('/livro/listarLivroCodigo/:id', (req, res)=>{
         });
 });
 
-router.delete('/livro/excluirLivro/:id', (req, res)=>{
+router.delete('/excluirMedicamento/:id_medicamento', (req, res)=>{
 
-    const { id } = req.params;
+    const {id_medicamento} = req.params;
 
-    modelLivro.findByPk(id)
+    modelMedicamento.findByPk(id_medicamento)
 
-        .then((livro)=>{
+        .then((medicamentos)=>{
 
-            livro.destroy({
-                where:{id}
+            medicamentos.destroy({
+                where:{id_medicamento}
             }).then(
                 ()=>{
 
@@ -93,24 +92,24 @@ router.delete('/livro/excluirLivro/:id', (req, res)=>{
 
 });
 
-router.put('/livro/editarLivro', (req, res)=>{
+router.put('/editarMedicamento', (req, res)=>{
 
-    const { titulo, preco, detalhes, imagen_peq, imagen_grd, tblCategoriaumId, id } = req.body;
+    const { titulo, preco, detalhes, imagen_peq, imagen_grd, tblCategoriaumId, id_medicamento } = req.body;
 
     /** UPDATE SEM IMAGEM **/
-    modelLivro.update(
+    modelMedicamento.update(
         {titulo,
         preco,
         detalhes,
         imagen_peq, 
         imagen_grd,
         tblCategoriaumId},
-        {where: {id}}
+        {where: {id_medicamento}}
     ).then(
         ()=>{
             return res.status(200).json({
                 erroStatus:false,
-                mensagemStatus:'Livro alterado com sucesso.'
+                mensagemStatus:'Medicamento alterado com sucesso.'
             });
         }).catch((erro)=>{
             return res.status(400).json({

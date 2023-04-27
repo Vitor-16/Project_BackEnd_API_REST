@@ -8,9 +8,14 @@ const connection = require('../database/database');
 representanto a cardinalidade*/
 const modelCliente = require('./modelCliente');
 
-const modelLivro = connection.define(
-    'tbl_livro',
+const modelMedicamento = connection.define(
+    'tbl_medicamento',
     {
+        id_medicamento:{
+            type: Sequelize.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
         titulo:{
             type: Sequelize.STRING,
             allowNull: false
@@ -35,12 +40,11 @@ const modelLivro = connection.define(
 );
 
 /*Implementação da  CHAVE ESTRANGEIRA - LADO N*/
-modelCliente.hasMany(modelLivro);
-
+modelCliente.hasMany(modelMedicamento);
 
 /*Implementação da  CHAVE PRIMÁRIA - LADO 1*/
-modelLivro.belongsTo(modelCliente);
+modelMedicamento.belongsTo(modelCliente);
 
-//Livro.sync({force:true});
+//modelLivro.sync({force:true});
 
-module.exports = modelLivro;
+module.exports = modelMedicamento;

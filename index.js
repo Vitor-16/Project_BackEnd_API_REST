@@ -3,7 +3,7 @@ const express = require('express');
 
 //IMPORTANDO ARQUIVO DE ROTAS CLIENTE
 const routesCliente = require('./routes/routesCliente');
-const routesLivro = require('./routes/routesLivro');
+const routesMedicamento = require('./routes/routesMedicamento');
 
 //CRIANDO EXECUTÁVEL DO EXPRESS ATRAVÉS DE APP
 const app = express();
@@ -13,7 +13,7 @@ app.use(express.urlencoded({extended:true}));
 
 //UTILIZANDO ROUTES.JS CRIADO
 app.use('/', routesCliente);
-app.use('/', routesLivro);
+app.use('/', routesMedicamento);
 
 /*TESTE DE ROTA RAIZ 
 app.get('/', function (req, res) {
